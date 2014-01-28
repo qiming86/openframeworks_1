@@ -4,7 +4,7 @@
 
 #include "ofxOpenCv.h"
 
-//#define _USE_LIVE_VIDEO		// uncomment this to use a live camera
+#define _USE_LIVE_VIDEO		// uncomment this to use a live camera
 								// otherwise, we'll use a movie file
 
 class testApp : public ofBaseApp{
@@ -25,17 +25,19 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);		
 
         #ifdef _USE_LIVE_VIDEO
-		  ofVideoGrabber 		vidGrabber;
+		  ofVideoGrabber 		vidGrabber;	//live camera will be used
 		#else
 		  ofVideoPlayer 		vidPlayer;
 		#endif
 
-        ofxCvColorImage			colorImg;
+        ofxCvColorImage		colorImg;			//hold orignal new frame
 
-        ofxCvGrayscaleImage 	grayImage;
-		ofxCvGrayscaleImage 	grayBg;
-		ofxCvGrayscaleImage 	grayDiff;
+        ofxCvGrayscaleImage 	grayImage;			//convert to grayimage
+	ofxCvGrayscaleImage 	grayBg;				//gray background image for abs
+	ofxCvGrayscaleImage 	grayDiff;			//hold grayimage aft abs
 
+//virtual int findContours( ofxCvGrayscaleImage& input, int minArea,
+//int maxArea, int nConsidered, bool bFindHoles, bool bUseApproximation = true);
         ofxCvContourFinder 	contourFinder;
 
 		int 				threshold;
